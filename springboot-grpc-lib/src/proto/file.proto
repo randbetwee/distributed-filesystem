@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+option java_generic_services = true;
+option java_multiple_files = true;
+option java_package = "com.distribute.grpc";
+option java_outer_classname = "fileInt";
+
+service FileService {
+    rpc Upload (FileRequest) returns (FileResponse);        //from the view of client
+    rpc Download (FileRequestBrif) returns (FileResponse);
+    rpc Update (FileRequest) returns(FileResponse);
+    rpc Delete (FileRequestBrif) returns(FileResponse);
+    rpc Commit (FileRequestBrif) returns(FileResponse);
+}
+
+message FileRequestBrif{
+    string fileName =1;
+}
+
+message FileRequest {
+    string fileName = 1;
+    bytes content = 2;
+}
+
+message FileResponse {
+    bytes content = 1;
+    int32 lock = 2;
+}

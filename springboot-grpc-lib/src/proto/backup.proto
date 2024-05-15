@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+option java_generic_services = true;
+option java_multiple_files = true;
+option java_package = "com.distribute.grpc";
+option java_outer_classname = "BackupInt";
+
+service BackupService {
+  rpc pull (TransferRequest) returns (TransferStatus);
+  rpc push (TransferResponse) returns (TransferRequest);
+  rpc delete (TransferRequest) returns (TransferStatus);
+}
+
+message TransferRequest {
+  string path = 1;
+  uint64 time = 2;
+}
+
+message TransferResponse {
+  string path = 1;
+  bytes content = 2;
+}
+
+message TransferStatus{
+  bool status=1;
+}

@@ -1,0 +1,28 @@
+// 说明使用的是：proto3语法
+syntax = "proto3";
+
+// java_package表示生成java代码的包名
+option java_package = "com.distribute.grpc";
+// java_multiple_files = true 表示生成多个java文件，若不设置该属性，则只会生成一个java文件
+option java_multiple_files = true;
+// java_outer_classname表示包含message描述的java文件的类名
+option java_outer_classname = "HelloWorldProto";
+
+// 定义一个服务，服务中可以编写多个方法。方法可以接受客户端的参数，再返回服务端的响应。
+service HelloWorld {
+  // 方法：接受 HelloRequest，返回 HelloResp
+  rpc sayHello(HelloRequest) returns (HelloResp) {}
+}
+
+// message关键字表示结构体
+message HelloRequest {
+  // 赋值是为了定义这个变量在message中的位置
+  string name = 1;
+  int32 id = 2;
+}
+
+message HelloResp {
+  string school = 1;
+  string address = 2;
+  int32 age = 3;
+}
